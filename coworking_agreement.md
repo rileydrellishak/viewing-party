@@ -4,12 +4,17 @@ Talk through each section with your partner. Add notes on what you discussed and
 
 ## Accessibility Needs
 *What does each team member need access to in order to succeed and show up the best they can?*
+- Nadia is in Seattle time, Riley is in EST time (3 hours ahead)
 
 ## Collaboration vs. Individual Work Expectations
 *Clarify your collaboration expectations - does your group want to write code together all of the time? Or divide work to do independently, then come together to share accomplishments? What tools and technologies can help your collaboration?*
+- Trying both, seeing how independent and coming together goes
+- Pick a task, push commit, come together to share accomplishments
 
 ## Learning Style
 *How does each team member learn best in project settings?*
+- Nadia
+- Riley
 
 ## Preferred Feedback Style
 *How does each team member best receive feedback?*
