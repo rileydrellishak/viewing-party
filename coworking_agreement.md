@@ -13,18 +13,22 @@ Talk through each section with your partner. Add notes on what you discussed and
 
 ## Learning Style
 *How does each team member learn best in project settings?*
-- Nadia
-- Riley
+- Nadia's project structure style helps her with being organized, schedule working time. Deadlines keep her up with projects/work and are motivating to finish on time.
+- Riley learns best when reading through requirements overall and then going into specific sections one at a time. Agree about deadlines!!
 
 ## Preferred Feedback Style
 *How does each team member best receive feedback?*
+- Nadia prefers a code review on her work -- informative, clear, receive feedback as soon as it appears. Doesn't need scheduled long feedback sessions
+- Riley agrees! 
 
 ## One Team Communication Skill to Improve
 *What is a teamwork-related skill you want to work on?*
+- Nadia wants to work on live coding virtually/collaborating online, git pushes/pulls
+- Riley wants to work on setting goals for work sessions
 
 ## Optional: Other agreements
 *Other co-working agreements that were not captured in the above sections.*
 
 ## Signatures
-______________ _______________
-Date: _________
+Riley Drellishak _______________
+Date: September 22, 2025
