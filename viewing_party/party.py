@@ -6,25 +6,35 @@ def create_movie(title, genre, rating):
     Values are respective titles (str), genres (str), and ratings (float) for a movie.
     If any inputs are falsy, return None.
     Args:
-        title (str)
-        genre (str)
-        rating (float)
+        title (str): Title of movie.
+        genre (str): Gener of movie.
+        rating (float): Rating given to movie.
 
     Returns:
-        dict
+        dict: represents a movie with information about its title, genre, and rating.
     """
+    # check: if not title or not movie or not rating: return None
+    # create a dictionary called movie = {}
+    # movie["title"] = title
+    # movie["genre"] = genre
+    # movie["rating"] = rating
+    # return movie
     pass
 
 def add_to_watched(user_data, movie):
     """Adds a dictionary of movie data to a list of user's watched movies.
 
     Args:
-        user_data: A list of dictionaries where dictionaries represent movies user has watched.
+        user_data: A  dictionary where key is "watched" and value is a list of dictionaries that represent movies user has watched.
         movie: A dictionary with key-value pairs representing the title, genre, and rating of a watched movie.
 
     Returns:
-        list: user_data with the movie dictionary appended.
+        list: user_data with the movie dictionary appended to the value of the "watched" key in user_data..
     """
+    # movie is a pre-made dictionary. must append the dictionary to the list that is the value of the key "watched" in the list 
+    # user_data["watched"] results in a list of movies
+    # append movie to user_data["watched"]
+    # return user_data
     pass
 
 def add_to_watchlist(user_data, movie):
@@ -78,7 +88,6 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-        
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
