@@ -60,7 +60,15 @@ def get_watched_avg_rating(user_data):
     Returns:
         average (float): Calculates the average rating of all the movies in the watched list. Returns 0.0 if value of "watched" is an empty list.
     """
-    pass
+    
+    sum = 0
+    list_movies = user_data["watched"]
+    if not list_movies:
+        return 0.0
+    for movie in list_movies:
+        sum += movie["rating"]
+    return sum / len(list_movies)    
+
 
 def get_most_watched_genre(user_data):
     """Finds the most frequently occurring genre in the watched movie list.
