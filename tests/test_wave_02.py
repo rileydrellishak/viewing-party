@@ -51,7 +51,7 @@ def test_most_watched_genre_order_mixed():
     assert popular_genre == "Fantasy"
     assert janes_data == clean_wave_2b_data()
 
-@pytest.mark.skip()
+
 def test_genre_is_None_if_empty_watched():
     # Arrange
     janes_data = {

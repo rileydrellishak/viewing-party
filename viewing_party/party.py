@@ -26,14 +26,6 @@ def add_to_watchlist(user_data, movie):
 
 
 def watch_movie(user_data, title):
-    list_movies = user_data["watchlist"]
-    for movie in list_movies[:]:
-        if movie["title"] == title:
-            list_movies.remove(movie)
-            user_data["watched"].append(movie)
-            break 
-    return user_data
-
     """Create a dictionary with key-value pairs. A dictionary represents a single movie.
     Keys are title, genre, and rating (str).
     Values are respective titles (str), genres (str), and ratings (float) for a movie.
@@ -46,13 +38,14 @@ def watch_movie(user_data, title):
     Returns:
         dict: represents a movie with information about its title, genre, and rating.
     """
-    # check: if not title or not movie or not rating: return None
-    # create a dictionary called movie = {}
-    # movie["title"] = title
-    # movie["genre"] = genre
-    # movie["rating"] = rating
-    # return movie
-    
+    list_movies = user_data["watchlist"]
+    for movie in list_movies[:]:
+        if movie["title"] == title:
+            list_movies.remove(movie)
+            user_data["watched"].append(movie)
+            break 
+    return user_data
+
 
 
 # -----------------------------------------
@@ -78,7 +71,17 @@ def get_most_watched_genre(user_data):
     Returns:
         genre (float): Determines the most frequently occurring genre among the dictionaries of watched movies. Returns None if value of "watched" is an empty list.
     """
-    pass
+    if not user_data["watched"]:
+        return None
+    
+    genre_frequency_dict = {}
+    for i in range(0, len(user_data["watched"])):
+        if user_data["watched"][i]["genre"] not in genre_frequency_dict:
+            user_data["watched"][i]["genre"] = 1
+        else:
+            user_data["watched"][i]["genre"] += 1
+    most_watched_genre = genre_frequency_dict
+    return genre_frequency_dict
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
