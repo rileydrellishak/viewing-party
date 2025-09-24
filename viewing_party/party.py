@@ -176,7 +176,19 @@ def get_available_recs(user_data):
             Key "subscription" is a list of strings representing the streaming subscription the user has
 
     """
-    pass
+    recommend_movies = []
+    subscriptions = user_data["subscriptions"]
+
+    yes_friend_no_user = get_friends_unique_watched(user_data)
+    for movie in yes_friend_no_user:
+        if movie["host"] in subscriptions:
+            recommend_movies.append(movie)
+    return recommend_movies        
+
+
+
+
+
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
