@@ -104,6 +104,38 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
+def get_friends_unique_watched(user_data): 
+    """Synthesizes all the movies a group of friends have watched into a single list of movies (dictionaries) that the user has not watched and at least one of the user's friends has watched.
+
+    Args:
+        user_data: A dictionary with a key "watched" whose value is a list of movie dictionaries, and another key "friends" where the value of "friends" is a list. Each item in the list is a dictionary. Each dictionary has a key "watched" and a value of the list of movie dictionaries the friend has watched. Each movie dictionary has a value for the key "title".
+
+    Returns:
+        list: Each item in the list is a dictionary of a movie that the user has not watched but at least one of the user's friends has watched.
+    """
+    
+
+    # Create a set of the movie titles the user has watched
+    user_watched_movies_list = user_data["watched"]
+    user_watched_movie_titles = set()
+    for movie in user_watched_movies_list:
+        user_watched_movie_titles.add(movie["title"])
+    
+    # Create a set of the movie titles all the friends have watched
+    i = 0
+
+    friends_movie_titles = set()
+    while i < len(user_data["friends"]):
+        j = 0
+        while j < len(user_data["friends"][i]["watched"]):
+            friends_movie_titles.add(user_data["friends"][i]["watched"][j]["title"])
+            j += 1
+        i += 1
+    
+    result_set = friends_movie_titles - user_watched_movie_titles
+
+    # Now that we have the movie titles, we want to return their respective dictionaries
+    return None
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
