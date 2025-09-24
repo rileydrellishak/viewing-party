@@ -110,7 +110,6 @@ def get_unique_watched(user_data):
     list_movies_friends_watched = user_data["friends"]
 
     titles_set_friends_watched = set()
-    
     for watched_dict in list_movies_friends_watched:
         for movie in watched_dict["watched"]:
             title = movie["title"]
