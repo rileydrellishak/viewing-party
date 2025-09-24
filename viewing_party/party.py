@@ -159,3 +159,23 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+def get_new_rec_by_genre(user_data):
+    """Determine a list of recommended movies based on user's most frequently watched genre. Movies in the list should not be in the user's watched movies, at least one of the user's friends has watched it,  and the genre of the movie is the user's most frequent genre.
+
+    Args:
+        user_data: A dictionary with a key "watched" whose value is a list of movie dictionaries, and another key "friends" where the value of "friends" is a list. Each item in the list is a dictionary. Each dictionary has a key "watched" and a value of the list of movie dictionaries the friend has watched. Each movie dictionary has a value for the key "title".
+
+    Returns:
+        list of dictionaries: A list of movies that the user has not watched, at least one of their friends has watched, and the genre matches the user's most frequented genre
+    """
+    movie_recs = []
+    
+    watched_by_friends = get_friends_unique_watched(user_data)
+    most_watched_genre = get_most_watched_genre(user_data)
+
+    for movie in watched_by_friends:
+        if movie["genre"] == most_watched_genre:
+            movie_recs.append(movie)
+
+    return movie_recs
+
