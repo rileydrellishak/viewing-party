@@ -207,4 +207,12 @@ def get_rec_from_favorites(user_data):
     Returns:
         list of dictionaries: A list of movies that the user has not watched, at least one of their friends has watched, and the genre matches the user's most frequented genre
     """
-    pass
+    movie_recs = []
+    friends_not_watched = get_unique_watched(user_data)
+
+
+    for movie in user_data["favorites"]:
+        if movie in friends_not_watched:
+            movie_recs.append(movie)
+    
+    return movie_recs
