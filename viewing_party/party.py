@@ -127,7 +127,10 @@ def get_friends_unique_watched(user_data):
     """Synthesizes all the movies a group of friends have watched into a single list of movies (dictionaries) that the user has not watched and at least one of the user's friends has watched.
 
     Args:
-        user_data: A dictionary with a key "watched" whose value is a list of movie dictionaries, and another key "friends" where the value of "friends" is a list. Each item in the list is a dictionary. Each dictionary has a key "watched" and a value of the list of movie dictionaries the friend has watched. Each movie dictionary has a value for the key "title".
+        user_data: A dictionary with a three key-value pairs.
+            Key "watched" whose value is a list of movie dictionaries
+            Key "friends" where the value of "friends" is a list. Each item in the list is a dictionary. Each dictionary has a key "watched" and a value of the list of movie dictionaries the friend has watched. Each movie dictionary has a value for the keys "title", "genre", and "rating".
+            
 
     Returns:
         list: Each item in the list is a dictionary of a movie that the user has not watched but at least one of the user's friends has watched.
@@ -154,7 +157,17 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+def get_available_recs(user_data):
+    """Determine a list of recommended movies where the user has not watched it, at least one of the user's friends has watched, and the host of the movie is a service that is in the user's subscriptions.
 
+    Args:
+        user_data: A dictionary with a three key-value pairs.
+            Key "watched" whose value is a list of movie dictionaries
+            Key "friends" where the value of "friends" is a list. Each item in the list is a dictionary. Each dictionary has a key "watched" and a value of the list of movie dictionaries the friend has watched. Each movie dictionary has a value for the keys "title", "genre", "rating", and "host".
+            Key "subscription" is a list of strings representing the streaming subscription the user has
+
+    """
+    pass
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
