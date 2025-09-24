@@ -131,30 +131,25 @@ def get_friends_unique_watched(user_data):
 
     Returns:
         list: Each item in the list is a dictionary of a movie that the user has not watched but at least one of the user's friends has watched.
-    """
-    
+    """ 
 
-    # Create a set of the movie titles the user has watched
-    user_watched_movies_list = user_data["watched"]
-    user_watched_movie_titles = set()
-    for movie in user_watched_movies_list:
-        user_watched_movie_titles.add(movie["title"])
-    
-    # Create a set of the movie titles all the friends have watched
-    i = 0
+    user_watched_movies = []
+    friends_watched_movies = []
+    yes_friend_no_user = []
 
-    friends_movie_titles = set()
-    while i < len(user_data["friends"]):
-        j = 0
-        while j < len(user_data["friends"][i]["watched"]):
-            friends_movie_titles.add(user_data["friends"][i]["watched"][j]["title"])
-            j += 1
-        i += 1
-    
-    result_set = friends_movie_titles - user_watched_movie_titles
+    for movie in user_data["watched"]:
+        user_watched_movies.append(movie)
 
-    # Now that we have the movie titles, we want to return their respective dictionaries
-    return None
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie not in friends_watched_movies:
+                friends_watched_movies.append(movie)
+
+    for movie in friends_watched_movies:
+        if movie not in user_watched_movies:
+            yes_friend_no_user.append(movie)
+    
+    return yes_friend_no_user
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
