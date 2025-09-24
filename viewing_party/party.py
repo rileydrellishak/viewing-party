@@ -1,6 +1,10 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
+    """
+    Create a movie dictionary with title, genre, and rating.
+    Return None if any field is missing.
+    """
     if not title or not genre or not rating:
         return None
     movie = {}
@@ -10,6 +14,9 @@ def create_movie(title, genre, rating):
     return movie
 
 def add_to_watched(user_data, movie):
+    """
+    Add a movie to the user's watched list and return updated user_data.
+    """
     if not user_data["watched"]:
         user_data["watched"] = [movie]
     else:
@@ -18,6 +25,9 @@ def add_to_watched(user_data, movie):
 
 
 def add_to_watchlist(user_data, movie):
+    """
+    Add a movie to the user's watchlist and return updated user_data.
+    """
     if not user_data["watchlist"]:
         user_data["watchlist"] = [movie]
     else:
@@ -45,8 +55,6 @@ def watch_movie(user_data, title):
             user_data["watched"].append(movie)
             break 
     return user_data
-
-
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
