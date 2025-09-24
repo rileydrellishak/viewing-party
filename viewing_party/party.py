@@ -136,6 +136,26 @@ def get_friends_unique_watched(user_data):
 
     # Now that we have the movie titles, we want to return their respective dictionaries
     return None
+def get_unique_watched(user_data):
+    list_unique_movies = []
+    list_movies_user_watched = user_data["watched"]
+    list_movies_friends_watched = user_data["friends"]
+
+    titles_set_friends_watched = set()
+    for watched_dict in list_movies_friends_watched:
+        for movie in watched_dict["watched"]:
+            title = movie["title"]
+            if title:
+                titles_set_friends_watched.add(title)
+
+    watched = set()
+    for movie in list_movies_user_watched:
+        title = movie["title"]
+        if title and title not in titles_set_friends_watched and title not in watched:
+            list_unique_movies.append(movie)
+            watched.add(title)
+    return list_unique_movies  
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
