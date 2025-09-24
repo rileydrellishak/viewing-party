@@ -176,7 +176,10 @@ def get_new_rec_by_genre(user_data):
     """Determine a list of recommended movies based on user's most frequently watched genre. Movies in the list should not be in the user's watched movies, at least one of the user's friends has watched it,  and the genre of the movie is the user's most frequent genre.
 
     Args:
-        user_data: A dictionary with a key "watched" whose value is a list of movie dictionaries, and another key "friends" where the value of "friends" is a list. Each item in the list is a dictionary. Each dictionary has a key "watched" and a value of the list of movie dictionaries the friend has watched. Each movie dictionary has a value for the key "title".
+        user_data: Three key-value pairs.
+            Key "watched" whose value is a list of movie dictionaries
+            Key "friends" where the value of "friends" is a list. Each item in the list is a dictionary. Each dictionary has a key "watched" and a value of the list of movie dictionaries the friend has watched. Each movie dictionary has a value for the keys "title", "genre", "rating", and "host".
+            Key "subscription" has a value of a list of strings representing the streaming subscription the user has
 
     Returns:
         list of dictionaries: A list of movies that the user has not watched, at least one of their friends has watched, and the genre matches the user's most frequented genre
@@ -192,3 +195,16 @@ def get_new_rec_by_genre(user_data):
 
     return movie_recs
 
+def get_rec_from_favorites(user_data):
+    """Determine a list of recommended movies from movies that none of the user's friends have watched and the movie is in the user's favorites.
+
+    Args:
+        user_data: Four key-pair values
+            Key "watched" whose value is a list of movie dictionaries
+            Key "friends" where the value of "friends" is a list. Each item in the list is a dictionary. Each dictionary has a key "watched" and a value of the list of movie dictionaries the friend has watched. Each movie dictionary has a value for the keys "title", "genre", "rating", and "host".
+            Key "subscription" has a value of a list of strings representing the streaming subscription the user has.
+            Key "favorites" has a value of a list of movie dictionaries, representing the user's favorite movies.
+    Returns:
+        list of dictionaries: A list of movies that the user has not watched, at least one of their friends has watched, and the genre matches the user's most frequented genre
+    """
+    pass
