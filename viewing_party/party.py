@@ -104,6 +104,15 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 def get_unique_watched(user_data):
+    """
+    Return movies watched only by the user, not by any friends.
+
+    Args:
+        user_data (dict): Contains "watched" (list of movies) and "friends" (list of friends with their watched movies).
+
+    Returns:
+        list of dict: Movies unique to the user.
+    """
     list_unique_movies = []
     list_movies_user_watched = user_data["watched"]
     list_movies_friends_watched = user_data["friends"]
