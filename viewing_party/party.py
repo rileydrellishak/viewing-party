@@ -36,10 +36,7 @@ def add_to_watchlist(user_data, movie):
 
 
 def watch_movie(user_data, title):
-    """Create a dictionary with key-value pairs. A dictionary represents a single movie.
-    Keys are title, genre, and rating (str).
-    Values are respective titles (str), genres (str), and ratings (float) for a movie.
-    If any inputs are falsy, return None.
+    """Create a dictionary that represents a single movie. If any inputs are falsy, return None.
     Args:
         title (str): Title of movie.
         genre (str): Gener of movie.
@@ -84,8 +81,13 @@ def get_most_watched_genre(user_data):
     Args:
         user_data: A dictionary with a "watched" list of movie dictionaries. Key is "watched" and value is a list of dictionaries. Each watched movie has a genre, represented by a string.
 
+        user_data = {"watched":
+            [{title:"", genre:"", rating: float}, 
+            {title:"", genre:"", rating: float}]
+            }
+
     Returns:
-        genre (float): Determines the most frequently occurring genre among the dictionaries of watched movies. Returns None if value of "watched" is an empty list.
+        genre (str): Determines the most frequently occurring genre among the dictionaries of watched movies. Returns None if value of "watched" is an empty list.
     """
     if not user_data["watched"]:
         return None
@@ -117,9 +119,20 @@ def get_unique_watched(user_data):
 
     Args:
         user_data (dict): Contains "watched" (list of movies) and "friends" (list of friends with their watched movies).
+        user_data = {"watched":
+            [{title:"", genre:"", rating: float}, 
+            {title:"", genre:"", rating: float}],
+            "friends":[{"watched": {title:"", genre:"", rating: float}},
+            {"watched": {title:"", genre:"", rating: float}}]
+            }
 
     Returns:
         list of dict: Movies unique to the user.
+        list_unique_movies = [
+            {title:"", genre:"", rating: float},
+            {title:"", genre:"", rating: float},
+            {title:"", genre:"", rating: float}
+        ]
     """
     list_unique_movies = []
     list_movies_user_watched = user_data["watched"]
@@ -145,12 +158,20 @@ def get_friends_unique_watched(user_data):
 
     Args:
         user_data: A dictionary with a three key-value pairs.
-            Key "watched" whose value is a list of movie dictionaries
-            Key "friends" where the value of "friends" is a list. Each item in the list is a dictionary. Each dictionary has a key "watched" and a value of the list of movie dictionaries the friend has watched. Each movie dictionary has a value for the keys "title", "genre", and "rating".
-            
+            user_data = {"watched":
+                [{title:"", genre:"", rating: float}, 
+                {title:"", genre:"", rating: float}],
+                "friends":[{"watched": {title:"", genre:"", rating: float}},
+                {"watched": {title:"", genre:"", rating: float}}]
+            }
 
     Returns:
         list: Each item in the list is a dictionary of a movie that the user has not watched but at least one of the user's friends has watched.
+        yes_friend_no_user = [
+            {title:"", genre:"", rating: float},
+            {title:"", genre:"", rating: float},
+            {title:"", genre:"", rating: float}
+        ]
     """ 
 
     user_watched_movies = []
