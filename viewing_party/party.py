@@ -60,7 +60,12 @@ def get_watched_avg_rating(user_data):
     """Calculates the average rating of all the movies in the "watched" movie list.
 
     Args:
-        user_data: A dictionary with a "watched" list of movie dictionaries. Key is "watched" and value is a list of dictionaries. Each movie has a rating, represented by a float.
+        user_data (dictionary):
+            "watched": List of dictionaries that represent movies the user has watched.
+                Movie dictionaries has the following key-value pairs:
+                    title (str)
+                    genre (str)
+                    rating (float)
 
     Returns:
         average (float): Calculates the average rating of all the movies in the watched list. Returns 0.0 if value of "watched" is an empty list.
@@ -79,12 +84,12 @@ def get_most_watched_genre(user_data):
     """Finds the most frequently occurring genre in the watched movie list.
 
     Args:
-        user_data: A dictionary with a "watched" list of movie dictionaries. Key is "watched" and value is a list of dictionaries. Each watched movie has a genre, represented by a string.
-
-        user_data = {"watched":
-            [{title:"", genre:"", rating: float}, 
-            {title:"", genre:"", rating: float}]
-            }
+        user_data (dictionary):
+            "watched": List of dictionaries that represent movies the user has watched.
+                Movie dictionaries has the following key-value pairs:
+                    title (str)
+                    genre (str)
+                    rating (float)
 
     Returns:
         genre (str): Determines the most frequently occurring genre among the dictionaries of watched movies. Returns None if value of "watched" is an empty list.
@@ -118,21 +123,25 @@ def get_unique_watched(user_data):
     Return movies watched only by the user, not by any friends.
 
     Args:
-        user_data (dict): Contains "watched" (list of movies) and "friends" (list of friends with their watched movies).
-        user_data = {"watched":
-            [{title:"", genre:"", rating: float}, 
-            {title:"", genre:"", rating: float}],
-            "friends":[{"watched": {title:"", genre:"", rating: float}},
-            {"watched": {title:"", genre:"", rating: float}}]
-            }
+        user_data (dictionary):
+            "watched": List of dictionaries that represent movies the user has watched.
+                Movie dictionaries has the following key-value pairs:
+                    title (str)
+                    genre (str)
+                    rating (float)
+            "friends": A list of dictionaries. Each dictionary is a friend.
+                Friend dictionaries have the following key-value pairs:
+                    "watched": List of dictionaries that represent movies the friend has watched.
+                        Movie dictionaries has the following key-value pairs:
+                            title (str)
+                            genre (str)
+                            rating (float)
 
     Returns:
-        list of dict: Movies unique to the user.
-        list_unique_movies = [
-            {title:"", genre:"", rating: float},
-            {title:"", genre:"", rating: float},
-            {title:"", genre:"", rating: float}
-        ]
+        list of dict: Movies unique to the user. Each dictionary represents a movie. The movie dictionaries has the following key-value pairs:
+            title (str)
+            genre (str)
+            rating (float)
     """
     list_unique_movies = []
     list_movies_user_watched = user_data["watched"]
@@ -153,25 +162,29 @@ def get_unique_watched(user_data):
             watched.add(title)
     return list_unique_movies  
 
-def get_friends_unique_watched(user_data): 
+def get_friends_unique_watched(user_data):
     """Synthesizes all the movies a group of friends have watched into a single list of movies (dictionaries) that the user has not watched and at least one of the user's friends has watched.
 
     Args:
-        user_data: A dictionary with a three key-value pairs.
-            user_data = {"watched":
-                [{title:"", genre:"", rating: float}, 
-                {title:"", genre:"", rating: float}],
-                "friends":[{"watched": {title:"", genre:"", rating: float}},
-                {"watched": {title:"", genre:"", rating: float}}]
-            }
+        user_data (dictionary):
+            "watched": List of dictionaries that represent movies the user has watched.
+                Movie dictionaries has the following key-value pairs:
+                    title (str)
+                    genre (str)
+                    rating (float)
+            "friends": A list of dictionaries. Each dictionary is a friend.
+                Friend dictionaries have the following key-value pairs:
+                    "watched": List of dictionaries that represent movies the friend has watched.
+                        Movie dictionaries has the following key-value pairs:
+                            title (str)
+                            genre (str)
+                            rating (float)
 
     Returns:
-        list: Each item in the list is a dictionary of a movie that the user has not watched but at least one of the user's friends has watched.
-        yes_friend_no_user = [
-            {title:"", genre:"", rating: float},
-            {title:"", genre:"", rating: float},
-            {title:"", genre:"", rating: float}
-        ]
+        list of dict: Movies unique to the friends (movies the user has not watched). Each dictionary represents a movie. The movie dictionaries has the following key-value pairs:
+            title (str)
+            genre (str)
+            rating (float)
     """ 
 
     user_watched_movies = []
@@ -199,10 +212,20 @@ def get_available_recs(user_data):
     """Determine a list of recommended movies where the user has not watched it, at least one of the user's friends has watched, and the host of the movie is a service that is in the user's subscriptions.
 
     Args:
-        user_data: A dictionary with a three key-value pairs.
-            Key "watched" whose value is a list of movie dictionaries
-            Key "friends" where the value of "friends" is a list. Each item in the list is a dictionary. Each dictionary has a key "watched" and a value of the list of movie dictionaries the friend has watched. Each movie dictionary has a value for the keys "title", "genre", "rating", and "host".
-            Key "subscription" is a list of strings representing the streaming subscription the user has
+        user_data (dictionary):
+            "watched": List of dictionaries that represent movies the user has watched.
+                Movie dictionaries has the following key-value pairs:
+                    title (str)
+                    genre (str)
+                    rating (float)
+            "friends": A list of dictionaries. Each dictionary is a friend.
+                Friend dictionaries have the following key-value pairs:
+                    "watched": List of dictionaries that represent movies the friend has watched.
+                        Movie dictionaries has the following key-value pairs:
+                            title (str)
+                            genre (str)
+                            rating (float)
+            "host": A list of strings. Each string is a subscription the user has.
 
     """
     recommend_movies = []
@@ -223,13 +246,22 @@ def get_available_recs(user_data):
 # -----------------------------------------
 
 def get_new_rec_by_genre(user_data):
-    """Determine a list of recommended movies based on user's most frequently watched genre. Movies in the list should not be in the user's watched movies, at least one of the user's friends has watched it,  and the genre of the movie is the user's most frequent genre.
+    """Determine a list of recommended movies based on user's most frequently watched genre. Movies in the list should not be in the user's watched movies, at least one of the user's friends has watched it, and the genre of the movie is the user's most frequent genre.
 
     Args:
-        user_data: Three key-value pairs.
-            Key "watched" whose value is a list of movie dictionaries
-            Key "friends" where the value of "friends" is a list. Each item in the list is a dictionary. Each dictionary has a key "watched" and a value of the list of movie dictionaries the friend has watched. Each movie dictionary has a value for the keys "title", "genre", "rating", and "host".
-            Key "subscription" has a value of a list of strings representing the streaming subscription the user has
+        user_data (dictionary):
+            "watched": List of dictionaries that represent movies the user has watched.
+                Movie dictionaries has the following key-value pairs:
+                    title (str)
+                    genre (str)
+                    rating (float)
+            "friends": A list of dictionaries. Each dictionary is a friend.
+                Friend dictionaries have the following key-value pairs:
+                    "watched": List of dictionaries that represent movies the friend has watched.
+                        Movie dictionaries has the following key-value pairs:
+                            title (str)
+                            genre (str)
+                            rating (float)
 
     Returns:
         list of dictionaries: A list of movies that the user has not watched, at least one of their friends has watched, and the genre matches the user's most frequented genre
@@ -249,11 +281,20 @@ def get_rec_from_favorites(user_data):
     """Determine a list of recommended movies from movies that none of the user's friends have watched and the movie is in the user's favorites.
 
     Args:
-        user_data: Four key-pair values
-            Key "watched" whose value is a list of movie dictionaries
-            Key "friends" where the value of "friends" is a list. Each item in the list is a dictionary. Each dictionary has a key "watched" and a value of the list of movie dictionaries the friend has watched. Each movie dictionary has a value for the keys "title", "genre", "rating", and "host".
-            Key "subscription" has a value of a list of strings representing the streaming subscription the user has.
-            Key "favorites" has a value of a list of movie dictionaries, representing the user's favorite movies.
+        user_data (dictionary):
+            "watched": List of dictionaries that represent movies the user has watched.
+                Movie dictionaries has the following key-value pairs:
+                    title (str)
+                    genre (str)
+                    rating (float)
+            "friends": A list of dictionaries. Each dictionary is a friend.
+                Friend dictionaries have the following key-value pairs:
+                    "watched": List of dictionaries that represent movies the friend has watched.
+                        Movie dictionaries has the following key-value pairs:
+                            title (str)
+                            genre (str)
+                            rating (float)
+            "favorites": A list of dictionaries. Each dictionary is a movie, representing the user's favorite movies.
     Returns:
         list of dictionaries: A list of movies that the user has not watched, at least one of their friends has watched, and the genre matches the user's most frequented genre
     """
