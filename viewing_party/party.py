@@ -1,5 +1,4 @@
 # ------------- WAVE 1 --------------------
-
 def create_movie(title, genre, rating):
     """
     Create a movie dictionary with title, genre, and rating.
@@ -23,7 +22,6 @@ def add_to_watched(user_data, movie):
         user_data["watched"].append(movie)    
     return user_data
 
-
 def add_to_watchlist(user_data, movie):
     """
     Add a movie to the user's watchlist and return updated user_data.
@@ -33,7 +31,6 @@ def add_to_watchlist(user_data, movie):
     else:
         user_data["watchlist"].append(movie)
     return user_data
-
 
 def watch_movie(user_data, title):
     """Create a dictionary that represents a single movie. If any inputs are falsy, return None.
@@ -52,7 +49,6 @@ def watch_movie(user_data, title):
             user_data["watched"].append(movie)
             break 
     return user_data
-
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
@@ -70,7 +66,6 @@ def get_watched_avg_rating(user_data):
     Returns:
         average (float): Calculates the average rating of all the movies in the watched list. Returns 0.0 if value of "watched" is an empty list.
     """
-    
     sum = 0
     list_movies = user_data["watched"]
     if not list_movies:
@@ -186,7 +181,6 @@ def get_friends_unique_watched(user_data):
             genre (str)
             rating (float)
     """ 
-
     user_watched_movies = []
     friends_watched_movies = []
     yes_friend_no_user = []
@@ -204,7 +198,6 @@ def get_friends_unique_watched(user_data):
             yes_friend_no_user.append(movie)
     
     return yes_friend_no_user
-
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
@@ -236,15 +229,9 @@ def get_available_recs(user_data):
         if movie["host"] in subscriptions:
             recommend_movies.append(movie)
     return recommend_movies        
-
-
-
-
-
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
-
 def get_new_rec_by_genre(user_data):
     """Determine a list of recommended movies based on user's most frequently watched genre. Movies in the list should not be in the user's watched movies, at least one of the user's friends has watched it, and the genre of the movie is the user's most frequent genre.
 
@@ -266,10 +253,9 @@ def get_new_rec_by_genre(user_data):
     Returns:
         list of dictionaries: A list of movies that the user has not watched, at least one of their friends has watched, and the genre matches the user's most frequented genre
     """
-    movie_recs = []
-    
     watched_by_friends = get_friends_unique_watched(user_data)
     most_watched_genre = get_most_watched_genre(user_data)
+    movie_recs = []
 
     for movie in watched_by_friends:
         if movie["genre"] == most_watched_genre:
@@ -298,9 +284,8 @@ def get_rec_from_favorites(user_data):
     Returns:
         list of dictionaries: A list of movies that the user has not watched, at least one of their friends has watched, and the genre matches the user's most frequented genre
     """
-    movie_recs = []
     friends_not_watched = get_unique_watched(user_data)
-
+    movie_recs = []
 
     for movie in user_data["favorites"]:
         if movie in friends_not_watched:
