@@ -76,24 +76,18 @@ def get_most_watched_genre(user_data):
     if not user_data["watched"]:
         return None
     
-    genre_frequency_dict = {}
-    for i in range(0, len(user_data["watched"])):
-        if user_data["watched"][i]["genre"] not in genre_frequency_dict:
-            genre_frequency_dict[user_data["watched"][i]["genre"]] = 1
-        else:
-            genre_frequency_dict[user_data["watched"][i]["genre"]] += 1
+    genre_frequency = {}
+    for movie in user_data["watched"]:
+        genre_frequency[movie["genre"]] = genre_frequency.get(movie["genre"], 0) + 1
     
-    genres = list(genre_frequency_dict.keys())
-    counts = list(genre_frequency_dict.values())
-    most_frequent_count = counts[0]
-    index_of_most_frequent = 0
+    most_watched_genre = ""
+    most_watched_genre_count = 0
+    for genre, count in genre_frequency.items():
+        if count > most_watched_genre_count:
+            most_watched_genre = genre
+            most_watched_genre_count = count
     
-    for i in range(1, len(counts)):
-        if counts[i] > most_frequent_count:
-            most_frequent_count = counts[i]
-            index_of_most_frequent = i
-    
-    return genres[index_of_most_frequent]
+    return most_watched_genre
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
