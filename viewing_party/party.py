@@ -6,30 +6,23 @@ def create_movie(title, genre, rating):
     """
     if not title or not genre or not rating:
         return None
-    movie = {}
-    movie["title"] = title
-    movie["genre"] = genre
-    movie["rating"] = rating
+    movie = {"title": title,
+            "genre": genre,
+            "rating": rating}
     return movie
 
 def add_to_watched(user_data, movie):
     """
     Add a movie to the user's watched list and return updated user_data.
     """
-    if not user_data["watched"]:
-        user_data["watched"] = [movie]
-    else:
-        user_data["watched"].append(movie)    
+    user_data["watched"].append(movie)    
     return user_data
 
 def add_to_watchlist(user_data, movie):
     """
     Add a movie to the user's watchlist and return updated user_data.
     """
-    if not user_data["watchlist"]:
-        user_data["watchlist"] = [movie]
-    else:
-        user_data["watchlist"].append(movie)
+    user_data["watchlist"].append(movie)
     return user_data
 
 def watch_movie(user_data, title):
@@ -53,26 +46,17 @@ def watch_movie(user_data, title):
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 def get_watched_avg_rating(user_data):
-    """Calculates the average rating of all the movies in the "watched" movie list.
-
-    Args:
-        user_data (dictionary):
-            "watched": List of dictionaries that represent movies the user has watched.
-                Movie dictionaries has the following key-value pairs:
-                    title (str)
-                    genre (str)
-                    rating (float)
-
-    Returns:
-        average (float): Calculates the average rating of all the movies in the watched list. Returns 0.0 if value of "watched" is an empty list.
     """
-    sum = 0
+    Return the average rating of all movies in the user's watched list.
+    If the list is empty, return 0.0.
+    """
+    rating_total = 0.0
     list_movies = user_data["watched"]
     if not list_movies:
         return 0.0
     for movie in list_movies:
-        sum += movie["rating"]
-    return sum / len(list_movies)    
+        rating_total += movie["rating"]
+    return rating_total / len(list_movies)    
 
 
 def get_most_watched_genre(user_data):
@@ -115,47 +99,28 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 def get_unique_watched(user_data):
     """
-    Return movies watched only by the user, not by any friends.
-
-    Args:
-        user_data (dictionary):
-            "watched": List of dictionaries that represent movies the user has watched.
-                Movie dictionaries has the following key-value pairs:
-                    title (str)
-                    genre (str)
-                    rating (float)
-            "friends": A list of dictionaries. Each dictionary is a friend.
-                Friend dictionaries have the following key-value pairs:
-                    "watched": List of dictionaries that represent movies the friend has watched.
-                        Movie dictionaries has the following key-value pairs:
-                            title (str)
-                            genre (str)
-                            rating (float)
-
-    Returns:
-        list of dict: Movies unique to the user. Each dictionary represents a movie. The movie dictionaries has the following key-value pairs:
-            title (str)
-            genre (str)
-            rating (float)
+    Return a list of movies that appear in the user's watched list
+    but are not present in any friend's watched list.
+    Each movie is represented as a dictionary with title, genre, and rating.
     """
-    list_unique_movies = []
-    list_movies_user_watched = user_data["watched"]
-    list_movies_friends_watched = user_data["friends"]
+    unique_movies = []
+    user_watched = user_data["watched"]
+    friends = user_data["friends"]
 
-    titles_set_friends_watched = set()
-    for watched_dict in list_movies_friends_watched:
+    friends_title = set()
+    for watched_dict in friends:
         for movie in watched_dict["watched"]:
             title = movie["title"]
             if title:
-                titles_set_friends_watched.add(title)
+                friends_title.add(title)
 
     watched = set()
-    for movie in list_movies_user_watched:
+    for movie in user_watched:
         title = movie["title"]
-        if title and title not in titles_set_friends_watched and title not in watched:
-            list_unique_movies.append(movie)
+        if title and title not in friends_title and title not in watched:
+            unique_movies.append(movie)
             watched.add(title)
-    return list_unique_movies  
+    return unique_movies  
 
 def get_friends_unique_watched(user_data):
     """Synthesizes all the movies a group of friends have watched into a single list of movies (dictionaries) that the user has not watched and at least one of the user's friends has watched.
@@ -202,24 +167,10 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 def get_available_recs(user_data):
-    """Determine a list of recommended movies where the user has not watched it, at least one of the user's friends has watched, and the host of the movie is a service that is in the user's subscriptions.
-
-    Args:
-        user_data (dictionary):
-            "watched": List of dictionaries that represent movies the user has watched.
-                Movie dictionaries has the following key-value pairs:
-                    title (str)
-                    genre (str)
-                    rating (float)
-            "friends": A list of dictionaries. Each dictionary is a friend.
-                Friend dictionaries have the following key-value pairs:
-                    "watched": List of dictionaries that represent movies the friend has watched.
-                        Movie dictionaries has the following key-value pairs:
-                            title (str)
-                            genre (str)
-                            rating (float)
-            "host": A list of strings. Each string is a subscription the user has.
-
+    """
+    Return a list of movies recommended to the user.
+    A movie is recommended if at least one friend has watched it,
+    the user has not, and its host matches the user's subscriptions.
     """
     recommend_movies = []
     subscriptions = user_data["subscriptions"]
