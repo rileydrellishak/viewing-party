@@ -22,11 +22,18 @@ class User:
         """
         self.to_watch.remove(movie)
         self.watched.append(movie)
+        return f"{self.name} just watched {movie.title}.\nNow their watched movie list is {self.watched}."
 
-    def display_watched_movie_list(self):
-        watched = [movie.title for movie in self.watched]
-        return f"{self.name}'s watchlist: {watched}"
-    
-    def display_to_watch_movie_list(self):
-        to_watch = [movie.title for movie in self.to_watch]
-        return f"{self.name}'s watchlist: {to_watch}"
+    def display_watched_movies(self):
+        pass
+
+    def display_movie_lists(self):
+        watched_movies = []
+        to_watch_movies = []
+        for i in range(len(self.watched)):
+            watched_movies.append(self.watched[i].title)
+        for i in range(len(self.to_watch)):
+            to_watch_movies.append(self.to_watch[i].title)
+        watched_output = ", ".join(watched_movies)
+        to_watch_output = ", ".join(to_watch_movies)
+        return f"{self.name}'s movie lists!\nWatched: {watched_output}\nTo Watch: {to_watch_output}"
