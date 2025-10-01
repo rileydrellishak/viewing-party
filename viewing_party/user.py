@@ -13,18 +13,16 @@ class User:
         self.watched = watched if watched is not None else []
         self.to_watch = to_watch if watched is not None else []
     
-    def add_movie_to_list(self, movie, which_list):
+    def swap_movie_from_to_watch_to_watched(self, movie):
         """
-        Adds a given movie to either the watched or to_watched list.
+        Moves a movie from a user's to watch list to their watched list.
 
         Args:
-            movie: An instance of the class Movie.
+            movie: An instance of the class Movie. Represents the movie the user wants to move.
         """
-        if which_list == "watched":
-            self.watched.append(movie)
-        elif which_list == "to_watch":
-            self.to_watch.append(movie)
-    
+        self.to_watch.remove(movie)
+        self.watched.append(movie)
+
     def display_watched_movie_list(self):
         watched = [movie.title for movie in self.watched]
         return f"{self.name}'s watchlist: {watched}"
