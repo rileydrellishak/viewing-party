@@ -7,10 +7,11 @@ movie_c = Movie("Superman", "Action", 3.5)
 movie_d = Movie("The Shining", "Horror", 4.0)
 movie_e = Movie("Legally Blonde", "Comedy", 5.0)
 
+# Riley is a generic instance of the class User
 riley = User("Riley", [movie_a, movie_b, movie_c], [movie_d, movie_e])
+
+# Gene can test get most watched genre
 gene = User("Gene", [movie_a, movie_b, movie_c, movie_d, movie_e])
-# print(riley.display_movie_lists())
 
-# print(riley.swap_movie_from_to_watch_to_watched(movie_e))
-
-print(gene.get_most_watched_genre())
+# Sam can test the swap movie from to watch to watched list
+sam = User("Sam", [movie_a], [movie_b, movie_c])

@@ -17,9 +17,9 @@ class User:
         watched_movies = []
         to_watch_movies = []
         for i in range(len(self.watched)):
-            watched_movies.append(self.watched[i].display_movie_title())
+            watched_movies.append(self.watched[i].title)
         for i in range(len(self.to_watch)):
-            to_watch_movies.append(self.to_watch[i].display_movie_title())
+            to_watch_movies.append(self.to_watch[i].title)
         watched_output = ", ".join(watched_movies)
         to_watch_output = ", ".join(to_watch_movies)
         return watched_output, to_watch_output
@@ -46,4 +46,4 @@ class User:
         
         for genre, frequency in genre_frequency_map.items():
             if frequency == max(genre_frequency_map.values()):
-                return genre
+                return f"{self.name}'s most watched genre is {genre}"
