@@ -13,6 +13,21 @@ class User:
         self.watched = watched if watched is not None else []
         self.to_watch = to_watch if watched is not None else []
     
+    def stringify_movie_lists(self):
+        watched_movies = []
+        to_watch_movies = []
+        for i in range(len(self.watched)):
+            watched_movies.append(self.watched[i].display_movie_title())
+        for i in range(len(self.to_watch)):
+            to_watch_movies.append(self.to_watch[i].display_movie_title())
+        watched_output = ", ".join(watched_movies)
+        to_watch_output = ", ".join(to_watch_movies)
+        return watched_output, to_watch_output
+
+    def display_movie_lists(self):
+        tuple_of_movie_lists = self.stringify_movie_lists()
+        return f"{self.name}'s movie lists!\nWatched: {tuple_of_movie_lists[0]}\nTo Watch: {tuple_of_movie_lists[1]}"
+    
     def swap_movie_from_to_watch_to_watched(self, movie):
         """
         Moves a movie from a user's to watch list to their watched list.
@@ -22,18 +37,7 @@ class User:
         """
         self.to_watch.remove(movie)
         self.watched.append(movie)
-        return f"{self.name} just watched {movie.title}.\nNow their watched movie list is {self.watched}."
+        return f"{self.display_movie_lists()}"
 
     def display_watched_movies(self):
         pass
-
-    def display_movie_lists(self):
-        watched_movies = []
-        to_watch_movies = []
-        for i in range(len(self.watched)):
-            watched_movies.append(self.watched[i].title)
-        for i in range(len(self.to_watch)):
-            to_watch_movies.append(self.to_watch[i].title)
-        watched_output = ", ".join(watched_movies)
-        to_watch_output = ", ".join(to_watch_movies)
-        return f"{self.name}'s movie lists!\nWatched: {watched_output}\nTo Watch: {to_watch_output}"
