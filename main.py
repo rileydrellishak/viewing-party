@@ -8,7 +8,9 @@ movie_d = Movie("The Shining", "Horror", 4.0)
 movie_e = Movie("Legally Blonde", "Comedy", 5.0)
 
 riley = User("Riley", [movie_a, movie_b, movie_c], [movie_d, movie_e])
-
+gene = User("Gene", [movie_a, movie_b, movie_c, movie_d, movie_e])
 # print(riley.display_movie_lists())
 
-print(riley.swap_movie_from_to_watch_to_watched(movie_e))
+# print(riley.swap_movie_from_to_watch_to_watched(movie_e))
+
+print(gene.get_most_watched_genre())

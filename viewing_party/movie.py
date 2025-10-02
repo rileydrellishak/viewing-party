@@ -16,5 +16,3 @@ class Movie:
     def __str__(self):
         return f"{self.title} is a {self.genre} movie."
     
-    def display_movie_title(self):
-        return f"{self.title}"

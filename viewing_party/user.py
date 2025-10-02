@@ -39,5 +39,11 @@ class User:
         self.watched.append(movie)
         return f"{self.display_movie_lists()}"
 
-    def display_watched_movies(self):
-        pass
+    def get_most_watched_genre(self):
+        genre_frequency_map = {}
+        for movie in self.watched:
+            genre_frequency_map[movie.genre] = genre_frequency_map.get(movie.genre, 0) + 1
+        
+        for genre, frequency in genre_frequency_map.items():
+            if frequency == max(genre_frequency_map.values()):
+                return genre
