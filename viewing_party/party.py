@@ -28,8 +28,9 @@ def add_to_watchlist(user_data, movie):
     return user_data
 
 def watch_movie(user_data, title):
-    """Finds a movie by title in the user_data's watchlist and "moves" it from watchlist to watched.
-    
+    """
+    Finds a movie by title in the user_data's watchlist and "moves" it from watchlist to watched.
+
     Args:
         title (str): Title of movie.
         genre (str): Gener of movie.
@@ -38,12 +39,22 @@ def watch_movie(user_data, title):
     Returns:
         dict: represents user_data with updated movie lists.
     """
+    # List of movie dictionaries in user watchlist
     list_movies = user_data["watchlist"]
-    for movie in list_movies[:]:
+
+    # Makes a filtered list that contains the movies NOT being watched
+    filtered_movies = []
+    for movie in list_movies:
         if movie["title"] == title:
-            list_movies.remove(movie)
-            user_data["watched"].append(movie)
-            break 
+            add_to_watched(user_data, movie)
+            continue
+
+        # This only runs if the movie is not the one being watched
+        filtered_movies.append(movie)
+    
+    # Updates the watchlist to reflect that the movie with provided title is removed
+    user_data["watchlist"] = filtered_movies
+
     return user_data
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
@@ -55,10 +66,13 @@ def get_watched_avg_rating(user_data):
     """
     rating_total = 0.0
     list_movies = user_data["watched"]
+
     if not list_movies:
         return 0.0
+    
     for movie in list_movies:
         rating_total += movie["rating"]
+
     return rating_total / len(list_movies)    
 
 
