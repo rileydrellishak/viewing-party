@@ -150,7 +150,7 @@ def get_friends_unique_watched(user_data):
     '''
     user_watched_movies = []
     friends_watched_movies = []
-    yes_friend_no_user = []
+    movies_unique_to_friends = []
 
     for movie in user_data["watched"]:
         user_watched_movies.append(movie)
@@ -162,9 +162,9 @@ def get_friends_unique_watched(user_data):
 
     for movie in friends_watched_movies:
         if movie not in user_watched_movies:
-            yes_friend_no_user.append(movie)
+            movies_unique_to_friends.append(movie)
     
-    return yes_friend_no_user
+    return movies_unique_to_friends
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
@@ -177,10 +177,11 @@ def get_available_recs(user_data):
     recommend_movies = []
     subscriptions = user_data["subscriptions"]
 
-    yes_friend_no_user = get_friends_unique_watched(user_data)
-    for movie in yes_friend_no_user:
+    movies_unique_to_friends = get_friends_unique_watched(user_data)
+    for movie in movies_unique_to_friends:
         if movie["host"] in subscriptions:
             recommend_movies.append(movie)
+
     return recommend_movies        
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
@@ -206,7 +207,8 @@ def get_new_rec_by_genre(user_data):
     return movie_recs
 
 def get_rec_from_favorites(user_data):
-    """Return the user's favorite movies that none of their friends have watched.
+    """
+    Return the user's favorite movies that none of their friends have watched.
 
     Args:
         user_data (dict): Should include keys "favorites", "watched", and "friends".
