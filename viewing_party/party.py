@@ -103,30 +103,50 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+def get_unique_movies_between_lists(movies_to_filter, movies_to_exclude):
+    """
+    Helper function: Return movies from movies_to_filter that aren't in movies_to_exclude (by title).
+    
+    Args:
+        movies_to_filter (list): List of movie dicts to filter from
+        movies_to_exclude (list): List of movie dicts whose titles should be excluded
+    
+    Returns:
+        list: Unique movie dicts from movies_to_filter not in movies_to_exclude (no duplicates)
+    """
+    unique_movies = []
+    
+    # Create set of titles to exclude for O(1) lookup
+    exclude_titles = set()
+    for movie in movies_to_exclude:
+        title = movie["title"]
+        if title:
+            exclude_titles.add(title)
+    
+    # Add movies not in exclude list (avoiding duplicates)
+    seen = set()
+    for movie in movies_to_filter:
+        title = movie["title"]
+        if title not in exclude_titles and title not in seen:
+            unique_movies.append(movie)
+            seen.add(title)
+    
+    return unique_movies
+
 def get_unique_watched(user_data):
     """
     Return a list of movies that appear in the user's watched list
     but are not present in any friend's watched list.
     Each movie is represented as a dictionary with title, genre, and rating.
     """
-    unique_movies = []
     user_watched = user_data["watched"]
-    friends = user_data["friends"]
-
-    friends_title = set()
-    for watched_dict in friends:
-        for movie in watched_dict["watched"]:
-            title = movie["title"]
-            if title:
-                friends_title.add(title)
-
-    watched = set()
-    for movie in user_watched:
-        title = movie["title"]
-        if title not in friends_title and title not in watched:
-            unique_movies.append(movie)
-            watched.add(title)
-    return unique_movies  
+    
+    # Collect all movies from all friends
+    friends_movies = []
+    for friend in user_data["friends"]:
+        friends_movies.extend(friend["watched"])
+    
+    return get_unique_movies_between_lists(user_watched, friends_movies)  
 
 def get_friends_unique_watched(user_data):
     '''
@@ -148,23 +168,14 @@ def get_friends_unique_watched(user_data):
         >>> get_friends_unique_watched(user_data)
         [{"title": "C"}, {"title": "D"}]
     '''
-    user_watched_movies = []
-    friends_watched_movies = []
-    movies_unique_to_friends = []
-
-    for movie in user_data["watched"]:
-        user_watched_movies.append(movie)
-
-    for friend in user_data["friends"]:
-        for movie in friend["watched"]:
-            if movie not in friends_watched_movies:
-                friends_watched_movies.append(movie)
-
-    for movie in friends_watched_movies:
-        if movie not in user_watched_movies:
-            movies_unique_to_friends.append(movie)
+    user_watched = user_data["watched"]
     
-    return movies_unique_to_friends
+    # Collect all movies from all friends
+    friends_movies = []
+    for friend in user_data["friends"]:
+        friends_movies.extend(friend["watched"])
+    
+    return get_unique_movies_between_lists(friends_movies, user_watched)
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
